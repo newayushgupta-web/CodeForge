@@ -44,3 +44,37 @@ CodeForge/
 ├── index.html
 ├── style.css
 └── README.md
+```
+
+## Responsive Design
+
+The website is designed to work across:
+
+- Desktop
+- Laptop
+- Tablet
+- Mobile
+
+CSS media queries are used to adapt the layout and typography for smaller screens.
+
+## Learning Outcomes
+
+Through this project, I practiced:
+
+- Semantic HTML structure
+- CSS layout techniques
+- Flexbox and CSS Grid
+- Responsive web design
+- CSS transitions and animations
+- GitHub repository management
+- GitHub Pages deployment
+
+## Author
+
+Ayush Gupta
+
+B.Tech — Electronics & Computer Science Engineering
+
+## License
+
+This project was created for educational and internship purposes.
