@@ -670,8 +670,11 @@ footer p {
         gap: 20px;
         text-align: center;
     }
-}
 
+   .code-window {
+    display: none;
+}
+}
 
 @media (max-width: 500px) {
 
@@ -704,5 +707,158 @@ footer p {
     .cta h2 {
         font-size: 45px;
         letter-spacing: -2px;
+    }
+}
+
+.code-window {
+    position: absolute;
+
+    right: 8%;
+    top: 50%;
+
+    width: 430px;
+
+    background: #111;
+    border: 1px solid #333;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.18);
+
+    transform: translateY(-50%) rotate(2deg);
+
+    z-index: 2;
+
+    animation: codeFloat 5s ease-in-out infinite;
+}
+
+
+.window-top {
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 18px;
+
+    background: #1b1b1b;
+
+    border-bottom: 1px solid #303030;
+}
+
+
+.window-dots {
+    display: flex;
+    gap: 7px;
+}
+
+
+.window-dots span {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: #666;
+}
+
+
+.window-title {
+    margin-left: auto;
+    margin-right: auto;
+
+    color: #858585;
+
+    font-size: 13px;
+
+    transform: translateX(-10px);
+}
+
+
+.code-content {
+    padding: 32px;
+
+    min-height: 260px;
+
+    color: #d4d4d4;
+
+    font-family: "Courier New", monospace;
+
+    font-size: 15px;
+
+    line-height: 2;
+}
+
+
+.code-content p {
+    margin: 0;
+    padding-left: 20px;
+}
+
+
+.code-purple {
+    color: #c792ea;
+}
+
+
+.code-blue {
+    color: #82aaff;
+}
+
+
+.code-key {
+    color: #ffcb6b;
+}
+
+
+.code-green {
+    color: #c3e88d;
+}
+
+
+.code-orange {
+    color: #ff9d5c;
+}
+
+
+.code-cursor {
+    display: inline-block;
+
+    width: 7px;
+    height: 18px;
+
+    margin-left: 4px;
+
+    vertical-align: middle;
+
+    background: #ff6900;
+
+    animation: blinkCursor 1s infinite;
+}
+
+
+@keyframes codeFloat {
+
+    0%, 100% {
+        transform: translateY(-50%) rotate(2deg);
+    }
+
+    50% {
+        transform: translateY(calc(-50% - 12px)) rotate(1deg);
+    }
+}
+
+
+@keyframes blinkCursor {
+
+    0%, 45% {
+        opacity: 1;
+    }
+
+    46%, 100% {
+        opacity: 0;
     }
 }
