@@ -5,15 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>CodeForge | Learn. Build. Grow.</title>
-  
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- Navigation -->
+    <!-- Navbar -->
     <header class="navbar">
-        <div class="logo">CodeForge</div>
+        <div class="logo">
+            <span class="logo-icon">&lt;/&gt;</span>
+            <span>CodeForge</span>
+        </div>
 
         <nav>
             <a href="#home">Home</a>
@@ -22,16 +25,17 @@
             <a href="#contact">Contact</a>
         </nav>
 
-        <a href="#courses" class="nav-button">Explore Courses</a>
+        <a href="#courses" class="nav-btn">Explore Courses</a>
     </header>
 
 
+    <!-- Hero Section -->
     <main>
 
-        <!-- Hero Section -->
         <section class="hero" id="home">
 
             <div class="hero-content">
+
                 <p class="eyebrow">LEARN • BUILD • GROW</p>
 
                 <h1>
@@ -40,25 +44,23 @@
                 </h1>
 
                 <p class="hero-text">
-                    Learn modern web development through practical
-                    projects, clear lessons and hands-on challenges.
+                    Learn modern web development through practical projects,
+                    clear lessons and hands-on challenges.
                 </p>
 
                 <div class="hero-buttons">
-                    <a href="#courses" class="primary-button">
-                        Start Learning
-                    </a>
-
-                    <a href="#features" class="secondary-button">
-                        Why CodeForge?
-                    </a>
+                    <a href="#courses" class="primary-btn">Start Learning</a>
+                    <a href="#features" class="secondary-btn">Why CodeForge?</a>
                 </div>
+
             </div>
+
+            <div class="hero-glow"></div>
 
         </section>
 
 
-        <!-- Courses Section -->
+        <!-- Courses -->
         <section class="courses" id="courses">
 
             <div class="section-heading">
@@ -70,8 +72,8 @@
                 </h2>
 
                 <p>
-                    Practical learning paths designed to help you
-                    build real-world skills.
+                    Practical learning paths designed to help you build
+                    real-world skills.
                 </p>
             </div>
 
@@ -79,21 +81,25 @@
             <div class="course-grid">
 
                 <article class="course-card">
-                    <span class="card-number">01</span>
+                    <div class="card-number">01</div>
+
+                    <div class="course-icon">&lt;/&gt;</div>
 
                     <h3>Frontend Development</h3>
 
                     <p>
-                        Build responsive websites using HTML,
-                        CSS and JavaScript.
+                        Build responsive websites using HTML, CSS
+                        and JavaScript.
                     </p>
 
-                    <a href="#">Explore →</a>
+                    <a href="#contact">Explore →</a>
                 </article>
 
 
                 <article class="course-card">
-                    <span class="card-number">02</span>
+                    <div class="card-number">02</div>
+
+                    <div class="course-icon">✦</div>
 
                     <h3>UI/UX Design</h3>
 
@@ -102,12 +108,14 @@
                         user-centered design principles.
                     </p>
 
-                    <a href="#">Explore →</a>
+                    <a href="#contact">Explore →</a>
                 </article>
 
 
                 <article class="course-card">
-                    <span class="card-number">03</span>
+                    <div class="card-number">03</div>
+
+                    <div class="course-icon">AI</div>
 
                     <h3>Python & AI</h3>
 
@@ -116,7 +124,7 @@
                         intelligent applications.
                     </p>
 
-                    <a href="#">Explore →</a>
+                    <a href="#contact">Explore →</a>
                 </article>
 
             </div>
@@ -124,56 +132,62 @@
         </section>
 
 
-        <!-- Features Section -->
+        <!-- Features -->
         <section class="features" id="features">
 
-            <div class="section-heading">
-                <p class="eyebrow">WHY CODEFORGE</p>
+            <div class="section-heading dark-heading">
 
                 <h2>
                     Learn skills that
                     <span>actually matter.</span>
                 </h2>
+
             </div>
 
 
             <div class="feature-grid">
 
-                <article class="feature">
+                <div class="feature-card">
+                    <div class="feature-icon">01</div>
+
                     <h3>Project-first learning</h3>
 
                     <p>
-                        Learn concepts by building practical
-                        projects instead of only studying theory.
+                        Learn concepts by building practical projects
+                        instead of only studying theory.
                     </p>
-                </article>
+                </div>
 
 
-                <article class="feature">
+                <div class="feature-card">
+                    <div class="feature-icon">02</div>
+
                     <h3>Responsive by default</h3>
 
                     <p>
-                        Create interfaces that work smoothly
-                        across desktops, tablets and mobiles.
+                        Create interfaces that work smoothly across
+                        desktops, tablets and mobiles.
                     </p>
-                </article>
+                </div>
 
 
-                <article class="feature">
+                <div class="feature-card">
+                    <div class="feature-icon">03</div>
+
                     <h3>Strong fundamentals</h3>
 
                     <p>
-                        Understand the fundamentals behind
-                        the technologies you use.
+                        Understand the fundamentals behind the
+                        technologies you use.
                     </p>
-                </article>
+                </div>
 
             </div>
 
         </section>
 
 
-        <!-- CTA Section -->
+        <!-- CTA -->
         <section class="cta" id="contact">
 
             <p class="eyebrow">START TODAY</p>
@@ -187,9 +201,7 @@
                 Learn, build and turn your ideas into reality.
             </p>
 
-            <a href="#courses" class="primary-button">
-                Get Started
-            </a>
+            <a href="#courses" class="primary-btn">Get Started</a>
 
         </section>
 
@@ -198,7 +210,12 @@
 
     <!-- Footer -->
     <footer>
-        <p>© 2026 CodeForge. Built with HTML5 & CSS3.</p>
+        <div class="footer-logo">
+            <span class="logo-icon">&lt;/&gt;</span>
+            CodeForge
+        </div>
+
+        <p>© 2026 CodeForge. Built with HTML & CSS.</p>
     </footer>
 
 </body>
