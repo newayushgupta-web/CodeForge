@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>CodeForge | Learn. Build. Grow.</title>
-
+    <title>CodeForge | Modern Responsive Learning Platform</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <!-- Navbar -->
+    <!-- Header / Navbar -->
     <header class="navbar">
         <div class="logo">
             <span class="logo-icon">&lt;/&gt;</span>
             <span>CodeForge</span>
         </div>
 
-        <nav>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="nav-menu" id="navMenu">
             <a href="#home">Home</a>
             <a href="#courses">Courses</a>
             <a href="#features">Features</a>
@@ -28,234 +31,116 @@
         <a href="#courses" class="nav-btn">Explore Courses</a>
     </header>
 
-
-  <!-- Hero Section -->
-<main>
-
-    <section class="hero" id="home">
-
-        <div class="hero-content">
-
-            <p class="eyebrow">LEARN • BUILD • GROW</p>
-
-            <h1>
-                Turn your ideas into
-                <span>real digital products.</span>
-            </h1>
-
-            <p class="hero-text">
-                Learn modern web development through practical projects,
-                clear lessons and hands-on challenges.
-            </p>
-
-            <div class="hero-buttons">
-                <a href="#courses" class="primary-btn">Start Learning</a>
-                <a href="#features" class="secondary-btn">Why CodeForge?</a>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <p class="eyebrow">LEARN • BUILD • GROW</p>
+                <h1>Turn your ideas into <span>real digital products.</span></h1>
+                <p class="hero-text">
+                    Learn modern web development through practical projects, 
+                    clear lessons, and hands-on responsive architecture.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#courses" class="primary-btn">Start Learning</a>
+                    <a href="#features" class="secondary-btn">Why CodeForge?</a>
+                </div>
             </div>
 
-        </div>
-
-
-        <!-- Code Preview -->
-        <div class="hero-visual">
-
-            <div class="code-window">
-
-                <div class="window-top">
-
-                    <div class="window-dots">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+            <!-- Floating Code Preview Window -->
+            <div class="hero-visual">
+                <div class="code-window">
+                    <div class="window-top">
+                        <div class="window-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <span class="window-title">viewport-audit.js</span>
                     </div>
-
-                    <span class="window-title">build.js</span>
-
+                    <div class="code-content">
+                        <span class="code-purple">const</span> <span class="code-blue">viewport</span> = {<br>
+                        &nbsp;&nbsp;<span class="code-key">mobile:</span> <span class="code-green">"320px - 480px"</span>,<br>
+                        &nbsp;&nbsp;<span class="code-key">tablet:</span> <span class="code-green">"481px - 1024px"</span>,<br>
+                        &nbsp;&nbsp;<span class="code-key">desktop:</span> <span class="code-green">"1025px+"</span>,<br>
+                        &nbsp;&nbsp;<span class="code-key">isFluid:</span> <span class="code-orange">true</span><br>
+                        };<br>
+                        <span class="code-purple">console</span>.<span class="code-blue">log</span>(viewport.<span class="code-key">isFluid</span>);
+                        <div class="code-cursor"></div>
+                    </div>
                 </div>
+                <div class="hero-glow"></div>
+            </div>
+        </section>
 
-
-                <div class="code-content">
-
-                    <span class="code-purple">const</span>
-                    <span class="code-blue">developer</span>
-                    <span> = {</span>
-
-                    <p>
-                        <span class="code-key">skills:</span>
-                        <span class="code-green">
-                            ["HTML", "CSS", "JS"]
-                        </span>
-                    </p>
-
-                    <p>
-                        <span class="code-key">learning:</span>
-                        <span class="code-orange">true</span>
-                    </p>
-
-                    <p>
-                        <span class="code-key">building:</span>
-                        <span class="code-orange">true</span>
-                    </p>
-
-                    <span>};</span>
-
-                    <div class="code-cursor"></div>
-
-                </div>
-
+        <!-- Courses Section -->
+        <section class="courses" id="courses">
+            <div class="section-heading">
+                <p class="eyebrow">LEARNING PATHS</p>
+                <h2>Choose a path and <span>start building.</span></h2>
+                <p>Structured curriculum engineered to scale from mobile screens to 4K displays.</p>
             </div>
 
-            <div class="hero-glow"></div>
+            <div class="course-grid">
+                <article class="course-card">
+                    <div class="card-number">01</div>
+                    <div class="course-icon">&lt;/&gt;</div>
+                    <h3>Frontend Architecture</h3>
+                    <p>Build accessible interfaces using modern Flexbox, CSS Grid, and media queries.</p>
+                    <a href="#contact">Explore Module →</a>
+                </article>
 
-        </div>
+                <article class="course-card">
+                    <div class="card-number">02</div>
+                    <div class="course-icon">✦</div>
+                    <h3>Responsive UI/UX</h3>
+                    <p>Master fluid typography, clamp formulas, and touch target optimization.</p>
+                    <a href="#contact">Explore Module →</a>
+                </article>
 
-    </section>
+                <article class="course-card">
+                    <div class="card-number">03</div>
+                    <div class="course-icon">AI</div>
+                    <h3>Fullstack Scalability</h3>
+                    <p>Architect robust client-server interfaces that perform on low-bandwidth networks.</p>
+                    <a href="#contact">Explore Module →</a>
+                </article>
+            </div>
+        </section>
 
-    <!-- Courses -->
-<section class="courses" id="courses">
-
-    <div class="section-heading">
-        <p class="eyebrow">LEARNING PATHS</p>
-
-        <h2>
-            Choose a path and
-            <span>start building.</span>
-        </h2>
-
-        <p>
-            Practical learning paths designed to help you build
-            real-world skills.
-        </p>
-    </div>
-
-    <div class="course-grid">
-
-        <article class="course-card">
-            <div class="card-number">01</div>
-
-            <div class="course-icon">&lt;/&gt;</div>
-
-            <h3>Frontend Development</h3>
-
-            <p>
-                Build responsive websites using HTML, CSS
-                and JavaScript.
-            </p>
-
-            <a href="#contact">Explore →</a>
-        </article>
-
-
-        <article class="course-card">
-            <div class="card-number">02</div>
-
-            <div class="course-icon">✦</div>
-
-            <h3>UI/UX Design</h3>
-
-            <p>
-                Learn visual hierarchy, layouts and
-                user-centered design principles.
-            </p>
-
-            <a href="#contact">Explore →</a>
-        </article>
-
-
-        <article class="course-card">
-            <div class="card-number">03</div>
-
-            <div class="course-icon">AI</div>
-
-            <h3>Python & AI</h3>
-
-            <p>
-                Explore Python programming and build
-                intelligent applications.
-            </p>
-
-            <a href="#contact">Explore →</a>
-        </article>
-
-    </div>
-
-</section>
-    
-    <!-- Features -->
+        <!-- Features Section -->
         <section class="features" id="features">
-
             <div class="section-heading dark-heading">
-
-                <h2>
-                    Learn skills that
-                    <span>actually matter.</span>
-                </h2>
-
+                <h2>Engineered for <span>device versatility.</span></h2>
             </div>
-
 
             <div class="feature-grid">
-
                 <div class="feature-card">
                     <div class="feature-icon">01</div>
-
-                    <h3>Project-first learning</h3>
-
-                    <p>
-                        Learn concepts by building practical projects
-                        instead of only studying theory.
-                    </p>
+                    <h3>Intrinsic Grid Layouts</h3>
+                    <p>Automatic content-wrapping via <code>minmax(280px, 1fr)</code> without unnecessary breakpoint jumps.</p>
                 </div>
-
-
                 <div class="feature-card">
                     <div class="feature-icon">02</div>
-
-                    <h3>Responsive by default</h3>
-
-                    <p>
-                        Create interfaces that work smoothly across
-                        desktops, tablets and mobiles.
-                    </p>
+                    <h3>Dynamic Clamp Typography</h3>
+                    <p>Text that smoothly calculates its font size according to current screen width.</p>
                 </div>
-
-
                 <div class="feature-card">
                     <div class="feature-icon">03</div>
-
-                    <h3>Strong fundamentals</h3>
-
-                    <p>
-                        Understand the fundamentals behind the
-                        technologies you use.
-                    </p>
+                    <h3>Zero Horizontal Scroll</h3>
+                    <p>Every parent and nested element respects strict bounding boxes and <code>box-sizing</code> rules.</p>
                 </div>
-
             </div>
-
         </section>
 
-
-        <!-- CTA -->
+        <!-- Call to Action -->
         <section class="cta" id="contact">
-
             <p class="eyebrow">START TODAY</p>
-
-            <h2>
-                Your next project
-                <span>starts here.</span>
-            </h2>
-
-            <p>
-                Learn, build and turn your ideas into reality.
-            </p>
-
-            <a href="#courses" class="primary-btn">Get Started</a>
-
+            <h2>Your next responsive project <span>starts here.</span></h2>
+            <p>Seamlessly testable across Chrome DevTools, iPad Mini, and modern smartphones.</p>
+            <a href="#courses" class="primary-btn">Get Started Now</a>
         </section>
-
     </main>
-
 
     <!-- Footer -->
     <footer>
@@ -263,9 +148,25 @@
             <span class="logo-icon">&lt;/&gt;</span>
             CodeForge
         </div>
-
-        <p>© 2026 CodeForge. Built with HTML & CSS.</p>
+        <p>© 2026 CodeForge. Architected with pure semantic HTML5 & responsive CSS3.</p>
     </footer>
 
+    <!-- Hamburger Toggle Script -->
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('open');
+        });
+
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('open');
+            });
+        });
+    </script>
 </body>
 </html>
