@@ -1,5 +1,5 @@
 // -------------------------------------------------------------
-// CodeForge - Week 3 Interactive JavaScript Logic
+// CodeForge - Week 4: Performance & Accessible Script Architecture
 // -------------------------------------------------------------
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // 2. Interactive Curriculum Selector (Master-Detail Switcher)
+    // 2. Interactive Curriculum Selector (ARIA-Synchronized)
     const navItems = document.querySelectorAll('.nav-item');
     const detailsPane = document.getElementById('detailsPane');
     const detailBadge = document.getElementById('detailBadge');
@@ -56,19 +56,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     navItems.forEach(item => {
         item.addEventListener('click', () => {
-            navItems.forEach(i => i.classList.remove('active'));
+            navItems.forEach(i => {
+                i.classList.remove('active');
+                i.setAttribute('aria-selected', 'false');
+            });
             item.classList.add('active');
+            item.setAttribute('aria-selected', 'true');
 
             const targetKey = item.getAttribute('data-target');
             const data = courseData[targetKey];
 
             if (data && detailsPane) {
-                // Re-trigger slide animation
                 detailsPane.classList.remove('pane-animated');
                 void detailsPane.offsetWidth;
                 detailsPane.classList.add('pane-animated');
 
-                // Dynamic DOM text injection
                 detailBadge.textContent = data.badge;
                 detailIcon.textContent = data.icon;
                 detailTitle.textContent = data.title;
@@ -77,7 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     exploreEnrollBtn.setAttribute('data-course', data.title);
                 }
 
-                // Populate topic bullets dynamically
                 detailTopics.innerHTML = '';
                 data.topics.forEach(topic => {
                     const li = document.createElement('li');
@@ -88,21 +89,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 3. Dynamic Course Enrollment Modal Dialog
+    // 3. Accessible Modal Dialog with Focus Trapping
     const modal = document.getElementById('courseModal');
     const modalCourseName = document.getElementById('modalCourseName');
     const closeModal = document.querySelector('.close-modal');
     const confirmEnrollBtn = document.getElementById('confirmEnrollBtn');
+    let lastActiveTrigger = null;
 
     document.addEventListener('click', (e) => {
         const enrollBtn = e.target.closest('.enroll-btn');
         if (enrollBtn) {
             e.preventDefault();
+            lastActiveTrigger = enrollBtn;
             const courseTitle = enrollBtn.getAttribute('data-course');
             if (modalCourseName) modalCourseName.textContent = courseTitle;
             if (modal) {
                 modal.classList.add('active');
+                modal.setAttribute('aria-hidden', 'false');
                 document.body.style.overflow = 'hidden';
+                if (closeModal) closeModal.focus();
             }
         }
     });
@@ -110,7 +115,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeModalDialog = () => {
         if (modal) {
             modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = '';
+            if (lastActiveTrigger) {
+                lastActiveTrigger.focus();
+            }
         }
     };
 
@@ -121,35 +130,50 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.addEventListener('click', (e) => {
             if (e.target === modal) closeModalDialog();
         });
+
+        // Focus Trapping Inside Modal
+        modal.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                const focusables = modal.querySelectorAll('button, [href], input, [tabindex]:not([tabindex="-1"])');
+                const first = focusables[0];
+                const last = focusables[focusables.length - 1];
+
+                if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
+                }
+            } else if (e.key === 'Escape') {
+                closeModalDialog();
+            }
+        });
     }
 
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
-            closeModalDialog();
-        }
-    });
-
-    // 4. Mobile Hamburger Drawer Navigation
+    // 4. Accessible Mobile Navigation Toggle
     const menuToggle = document.getElementById('menuToggle');
     const navMenu = document.getElementById('navMenu');
 
     if (menuToggle && navMenu) {
         menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            navMenu.classList.toggle('open');
-            document.body.style.overflow = navMenu.classList.contains('open') ? 'hidden' : '';
+            const isOpen = navMenu.classList.toggle('open');
+            menuToggle.classList.toggle('active', isOpen);
+            menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            document.body.style.overflow = isOpen ? 'hidden' : '';
         });
 
         document.querySelectorAll('.nav-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 menuToggle.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
                 navMenu.classList.remove('open');
                 document.body.style.overflow = '';
             });
         });
     }
 
-    // 5. Client-Side Form Validation with RegEx
+    // 5. Accessible Real-Time Form Validation (ARIA Live Feedback)
     const contactForm = document.getElementById('contactForm');
     const userEmail = document.getElementById('userEmail');
     const formMessage = document.getElementById('formMessage');
@@ -163,11 +187,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!emailRegex.test(emailValue)) {
                 formMessage.textContent = 'Please provide a valid email address.';
                 formMessage.className = 'form-message error';
+                userEmail.setAttribute('aria-invalid', 'true');
+                userEmail.focus();
                 return;
             }
 
             formMessage.textContent = 'Application received successfully! Check your inbox.';
             formMessage.className = 'form-message success';
+            userEmail.removeAttribute('aria-invalid');
             contactForm.reset();
         });
     }
