@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------
-   1. Theme Variables & Reset (WCAG 2.1 AA Compliant Contrast)
+   1. Theme Variables & Base Reset
 ------------------------------------------------------------- */
 :root {
     --bg-base: #07080c;
@@ -11,10 +11,9 @@
     --accent-cyan: #00f2fe;
     --accent-purple: #9d4edd;
     
-    /* High-contrast WCAG 2.1 colors */
-    --text-primary: #f8fafc;     /* Contrast 14.2:1 against bg-base */
-    --text-secondary: #cbd5e1;   /* Contrast 8.6:1 against bg-base */
-    --text-muted: #94a3b8;       /* Contrast 5.1:1 against bg-base */
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
     
     --gradient-glow: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #9d4edd 100%);
 }
@@ -43,7 +42,28 @@ a {
 }
 
 /* -------------------------------------------------------------
-   Accessibility Utilities (Screen Reader & Skip Link)
+   2. SPA View Routing & Transitions Architecture
+------------------------------------------------------------- */
+#main-container {
+    min-height: calc(100vh - 160px);
+    outline: none;
+}
+
+.spa-view {
+    display: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.spa-view.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* -------------------------------------------------------------
+   3. Accessibility & Focus Rings
 ------------------------------------------------------------- */
 .sr-only {
     position: absolute;
@@ -74,7 +94,6 @@ a {
     top: 20px;
 }
 
-/* Visible Keyboard Focus Ring Indicator */
 :focus-visible {
     outline: 2px solid var(--accent-cyan);
     outline-offset: 4px;
@@ -82,7 +101,7 @@ a {
 }
 
 /* -------------------------------------------------------------
-   Navbar
+   4. Navbar & Active Link Synchronization
 ------------------------------------------------------------- */
 .navbar {
     height: 80px;
@@ -134,11 +153,24 @@ a {
     color: var(--text-secondary);
     position: relative;
     padding: 6px 0;
-    transition: color 0.2s ease;
+    transition: color 0.25s ease;
 }
 
-.nav-menu a:hover {
+.nav-menu a:hover,
+.nav-menu a.active {
     color: var(--accent-cyan);
+    text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+}
+
+.nav-menu a.active::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-cyan);
+    border-radius: 2px;
 }
 
 .nav-btn {
@@ -188,7 +220,7 @@ a {
 .menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 /* -------------------------------------------------------------
-   Hero Section
+   5. Hero Section
 ------------------------------------------------------------- */
 .hero {
     min-height: calc(100vh - 80px);
@@ -361,10 +393,10 @@ a {
 }
 
 /* -------------------------------------------------------------
-   Curriculum Explorer (Master-Detail Zero-CLS Layout)
+   6. Curriculum Explorer Section
 ------------------------------------------------------------- */
 .courses {
-    padding: 80px 8%;
+    padding: 60px 8%;
     background: var(--bg-surface);
 }
 
@@ -487,7 +519,7 @@ a {
     flex-direction: column;
     position: relative;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-    min-height: 440px; /* Zero Layout Shift */
+    min-height: 440px;
 }
 
 .detail-header {
@@ -587,13 +619,11 @@ a {
 }
 
 /* -------------------------------------------------------------
-   Features Section
+   7. Features Section
 ------------------------------------------------------------- */
 .features {
-    padding: 90px 8%;
+    padding: 70px 8%;
     background: var(--bg-base);
-    border-top: 1px solid var(--border-subtle);
-    border-bottom: 1px solid var(--border-subtle);
 }
 
 .dark-heading h2 {
@@ -611,7 +641,7 @@ a {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
-    margin-top: 50px;
+    margin-top: 40px;
 }
 
 .feature-card {
@@ -645,10 +675,10 @@ a {
 }
 
 /* -------------------------------------------------------------
-   CTA & Form Validation
+   8. CTA & Form Section
 ------------------------------------------------------------- */
 .cta {
-    padding: 100px 8%;
+    padding: 80px 8%;
     text-align: center;
     background: radial-gradient(circle at center, rgba(0, 242, 254, 0.08) 0%, transparent 70%), var(--bg-base);
     display: flex;
@@ -714,7 +744,7 @@ a {
 .form-message.success { color: #27c93f; }
 
 /* -------------------------------------------------------------
-   Modal Window Architecture
+   9. Modal Window
 ------------------------------------------------------------- */
 .modal-overlay {
     position: fixed;
@@ -772,7 +802,7 @@ a {
 }
 
 /* -------------------------------------------------------------
-   Reduced Motion Directive (Vestibular Accessibility)
+   10. Reduced Motion & Animations
 ------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -783,9 +813,6 @@ a {
     }
 }
 
-/* -------------------------------------------------------------
-   Footer & Animations
-------------------------------------------------------------- */
 footer {
     padding: 35px 8%;
     display: flex;
@@ -825,20 +852,20 @@ footer {
 }
 
 /* -------------------------------------------------------------
-   Media Queries
+   11. Media Queries
 ------------------------------------------------------------- */
 @media screen and (max-width: 1024px) {
     .navbar { padding: 0 5%; }
     .hero {
         grid-template-columns: 1fr;
-        padding: 60px 5%;
+        padding: 50px 5%;
         text-align: center;
         gap: 40px;
     }
     .hero-content { margin: 0 auto; }
     .hero-text { margin: 0 auto 30px auto; }
     .hero-buttons { justify-content: center; }
-    .courses, .features { padding: 70px 5%; }
+    .courses, .features { padding: 50px 5%; }
 }
 
 @media screen and (max-width: 900px) {
