@@ -1,10 +1,75 @@
 // -------------------------------------------------------------
-// CodeForge - Week 4: Performance & Accessible Script Architecture
+// CodeForge - Week 5: Single Page Application (SPA) Router Engine
 // -------------------------------------------------------------
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. Dynamic Course Repository Object
+    // 1. SPA Route Registry
+    const routes = {
+        '#/home': {
+            viewId: 'view-home',
+            title: 'CodeForge | Modern SPA Learning Platform'
+        },
+        '#/courses': {
+            viewId: 'view-courses',
+            title: 'CodeForge | Interactive Curriculum Explorer'
+        },
+        '#/features': {
+            viewId: 'view-features',
+            title: 'CodeForge | Architecture & Performance'
+        },
+        '#/contact': {
+            viewId: 'view-contact',
+            title: 'CodeForge | Get In Touch'
+        }
+    };
+
+    const mainContainer = document.getElementById('main-container');
+    const navLinks = document.querySelectorAll('.spa-nav-link');
+    const spaViews = document.querySelectorAll('.spa-view');
+
+    // 2. Client-Side Navigation Controller
+    function handleRouting() {
+        const hash = window.location.hash || '#/home';
+        const targetRoute = routes[hash] || routes['#/home'];
+
+        // Mount matching view & unmount others
+        spaViews.forEach(view => {
+            if (view.id === targetRoute.viewId) {
+                view.classList.add('active');
+                view.setAttribute('aria-hidden', 'false');
+            } else {
+                view.classList.remove('active');
+                view.setAttribute('aria-hidden', 'true');
+            }
+        });
+
+        // Update Document Title
+        document.title = targetRoute.title;
+
+        // Synchronize Active Nav Indicator
+        navLinks.forEach(link => {
+            const linkRoute = link.getAttribute('data-route');
+            if (linkRoute === hash) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+
+        // Shift Accessible Focus to Active View
+        if (mainContainer) {
+            mainContainer.focus();
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Intercept Hash Changes and PopState Traversal
+    window.addEventListener('hashchange', handleRouting);
+    handleRouting();
+
+    // 3. Dynamic Course Repository
     const courseData = {
         frontend: {
             title: "Frontend Architecture",
@@ -14,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
             topics: [
                 "Semantic HTML5 & Accessibility Landmarks",
                 "Intrinsic CSS Grid & Flexbox Layouts",
-                "Fluid Typography via clamp() mathematics",
+                "Client-side Single Page Application routing",
                 "DOM manipulation & modular event architecture"
             ]
         },
@@ -44,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // 2. Interactive Curriculum Selector (ARIA-Synchronized)
+    // 4. Explorer Component Handling
     const navItems = document.querySelectorAll('.nav-item');
     const detailsPane = document.getElementById('detailsPane');
     const detailBadge = document.getElementById('detailBadge');
@@ -75,9 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 detailIcon.textContent = data.icon;
                 detailTitle.textContent = data.title;
                 detailDesc.textContent = data.desc;
-                if (exploreEnrollBtn) {
-                    exploreEnrollBtn.setAttribute('data-course', data.title);
-                }
+                if (exploreEnrollBtn) exploreEnrollBtn.setAttribute('data-course', data.title);
 
                 detailTopics.innerHTML = '';
                 data.topics.forEach(topic => {
@@ -89,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 3. Accessible Modal Dialog with Focus Trapping
+    // 5. Accessible Modal Architecture
     const modal = document.getElementById('courseModal');
     const modalCourseName = document.getElementById('modalCourseName');
     const closeModal = document.querySelector('.close-modal');
@@ -117,9 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.classList.remove('active');
             modal.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = '';
-            if (lastActiveTrigger) {
-                lastActiveTrigger.focus();
-            }
+            if (lastActiveTrigger) lastActiveTrigger.focus();
         }
     };
 
@@ -131,7 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.target === modal) closeModalDialog();
         });
 
-        // Focus Trapping Inside Modal
         modal.addEventListener('keydown', (e) => {
             if (e.key === 'Tab') {
                 const focusables = modal.querySelectorAll('button, [href], input, [tabindex]:not([tabindex="-1"])');
@@ -151,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. Accessible Mobile Navigation Toggle
+    // 6. Mobile Drawer Navigation
     const menuToggle = document.getElementById('menuToggle');
     const navMenu = document.getElementById('navMenu');
 
@@ -173,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 5. Accessible Real-Time Form Validation (ARIA Live Feedback)
+    // 7. Form Validation with Live Region
     const contactForm = document.getElementById('contactForm');
     const userEmail = document.getElementById('userEmail');
     const formMessage = document.getElementById('formMessage');
